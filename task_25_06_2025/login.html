@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login</title>
+    <style>
+        body {
+            background-color: lightblue;
+            text-align: center;
+            margin-top: 200px;
+            font-family: Arial, sans-serif;
+        }
+        
+        form {
+            background: white;
+            padding: 20px;
+            display: inline-block;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00796b;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            padding: 8px;
+            margin: 8px 0;
+            width: 200px;
+        }
+        
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: steelblue;
+            color: white;
+            border: none;
+        }
+        
+        #div {
+            color: red;
+        }
+    </style>
+    <script>
+        function validateLoginForm() {
+            var form = document.forms["myform"];
+            var email = form["email"].value;
+            var password = form["password"].value;
+            var errmsg = document.getElementById("div");
+            if (
+                email.indexOf("@") < 1 || email == "" ||
+                email.indexOf(".") < email.indexOf("@") + 2 ||
+                email.lastIndexOf(".") + 2 >= email.length
+            ) {
+                errmsg.innerHTML = "Enter a valid email address";
+                return false;
+            }
+            if (password == "") {
+                errmsg.innerHTML = "Enter your password";
+                return false;
+            }
+            if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                errmsg.innerHTML = "Password must contain at least one special character";
+                return false;
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <form id="myform">
+        <h2>Login Page</h2>
+        <input type="text" name="email" placeholder="Enter Email ID"><br>
+        <input type="password" name="password" placeholder="Enter Password"><br>
+        <input type="submit" value="Login" onclick="return validateLoginForm()">
+    </form><br><br>
+    <div id="div">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Register Form</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+            background-color: #d0f0fd;
+            font-family: Arial, sans-serif;
+            color: #004d40;
+        }
+        
+        form {
+            background: #ffffff;
+            padding: 20px;
+            display: inline-block;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        select {
+            padding: 8px;
+            width: 200px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        
+        #div {
+            color: red;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var form = document.forms["regForm"];
+            var name = form["name"].value;
+            var email = form["email"].value;
+            var password = form["password"].value;
+            var confirmPassword = form["confirm_password"].value;
+            var mobile = form["mobile"].value;
+            var gender = form["gender"].value;
+            var city = form["city"].value;
+            var terms = form["terms"].checked;
+            var errmsg = document.getElementById("div");
+
+
+            if (name == "") {
+                errmsg.innerHTML = "Enter your name";
+                return false;
+            }
+            if (!/^([A-Z][a-z]*)(\s[A-Z][a-z]*)*$/.test(name)) {
+                errmsg.innerHTML = "Each word must start with a capital letter";
+                return false;
+            }
+
+            if (
+                email.indexOf("@") < 1 || email == "" ||
+                email.indexOf(".") < email.indexOf("@") + 2 ||
+                email.lastIndexOf(".") + 2 >= email.length
+            ) {
+                errmsg.innerHTML = "Enter a valid email address";
+                return false;
+            }
+
+            if (password == "") {
+                errmsg.innerHTML = "Enter Password";
+                return false;
+            }
+            if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                errmsg.innerHTML = "Password must contain at least one special character";
+                return false;
+            }
+            if (confirmPassword == "") {
+                errmsg.innerHTML = "Enter confirmPassword";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errmsg.innerHTML = "Passwords do not match.";
+                return false;
+            }
+
+            if (mobile == "" || mobile.length != 10 || isNaN(mobile)) {
+                errmsg.innerHTML = "Please enter a valid 10-digit mobile number (cannot be empty).";
+                return false;
+            }
+
+            if (gender == "") {
+                errmsg.innerHTML = "Passwords do not match.";
+                return false;
+            }
+            if (city == "") {
+                errmsg.innerHTML = "select city";
+                return false;
+            }
+
+            if (!terms) {
+                errmsg.innerHTML = "Please accept the Terms and Conditions.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="regForm">
+        <h2 style="color:#004d40;">Register</h2>
+        <input type="text" name="name" placeholder="Full Name"><br>
+        <input type="text" name="email" placeholder="Email ID"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password"><br>
+        <input type="text" name="mobile" placeholder="Mobile Number"><br> Gender:
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female<br><br> Preferred Job Preferred Job Location:
+        <br> <select name="city">
+        <option value="">-Select City-</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Pune">Pune</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Chennai">Chennai</option>
+        </select><br><br>
+        <input type="checkbox" name="terms"> I accept the Terms and Conditions<br><br>
+        <input type="submit" value="Register" onclick="return validateForm()">
+
+    </form>
+    <div id="div"></div>
+</body>
+
+</html>
